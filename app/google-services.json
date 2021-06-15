@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "273089764460",
+    "project_id": "umpti-c486d",
+    "storage_bucket": "umpti-c486d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:273089764460:android:345d07e10158b89749cc49",
+        "android_client_info": {
+          "package_name": "ump.ti.ump"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "273089764460-p4movjaleoqh4i51a0f2bl4lkfcgp9l0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6f7yBKxB4ZildGjdhYcU0n5d6em6Ip4c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "273089764460-p4movjaleoqh4i51a0f2bl4lkfcgp9l0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

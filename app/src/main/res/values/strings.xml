@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Aplikasi Pendataan Mhasiswa Luar</string>
+    <string-array name="agama">
+        <item>Islam</item>
+        <item>Hindu</item>
+        <item>Budha</item>
+        <item>Kristen Katholik</item>
+        <item>Kristen Protestan</item>
+        <item>Lainya</item>
+    </string-array>
+</resources>

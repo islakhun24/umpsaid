@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ump.ti.ump">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Ump">
+        <activity android:name=".UbahPasswordAct"></activity>
+        <activity android:name=".ProfilAct" />
+        <activity android:name=".DetailMahasiswaAct" />
+        <activity android:name=".DetailInfoAct" />
+        <activity android:name=".InformasiAct" />
+        <activity android:name=".JurusanAct" />
+        <activity android:name=".InputJurusanAct" />
+        <activity android:name=".InputInformasiAct" />
+        <activity android:name=".MahasiswaAct" />
+        <activity android:name=".InputMahasiwaAct" />
+        <activity android:name=".HomeAct" />
+        <activity android:name=".LoginAct" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/SplashScreenStyle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
