@@ -1,22 +1,31 @@
 package ump.ti.ump.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.PopupMenu;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import ump.ti.ump.JurusanAct;
+import ump.ti.ump.MahasiswaAct;
 import ump.ti.ump.R;
 import ump.ti.ump.model.Jurusan;
+import ump.ti.ump.model.Mahasiswa;
 
 public class JurusanAdapter extends RecyclerView.Adapter<JurusanAdapter.ViewHolder> {
 
     private ArrayList<Jurusan> jurusanss;
     private Context context;
+    FirebaseDataListener listener;
 
     public JurusanAdapter(ArrayList<Jurusan> jurusans, Context ctx){
         /**
@@ -24,6 +33,7 @@ public class JurusanAdapter extends RecyclerView.Adapter<JurusanAdapter.ViewHold
          */
         jurusanss = jurusans;
         context = ctx;
+        listener = (JurusanAct)ctx;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -34,11 +44,11 @@ public class JurusanAdapter extends RecyclerView.Adapter<JurusanAdapter.ViewHold
          * dan juga view nya hanyalah satu TextView
          */
         TextView tvTitle, no;
-
+        LinearLayout rl;
         ViewHolder(View v) {
             super(v);
             tvTitle = (TextView) v.findViewById(R.id.tvJurusan);
-
+            rl = (LinearLayout) v.findViewById(R.id.ln);
             no = (TextView) v.findViewById(R.id.no);
         }
     }
@@ -78,6 +88,39 @@ public class JurusanAdapter extends RecyclerView.Adapter<JurusanAdapter.ViewHold
             }
         });
 
+        holder.rl.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                PopupMenu popup = new PopupMenu(context, holder.rl);
+                //inflating menu from xml resource
+                popup.inflate(R.menu.informasi_menu);
+                //adding click listener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.edit:
+                                //handle menu1 click
+                                return true;
+                            case R.id.delete:
+                                //handle menu2 click
+//                                Toast.makeText(context,mahasiswa.getKey(),Toast.LENGTH_LONG).show();
+//                                Log.d("stg", "onMenuItemClick: "+jurusanss.get(position).getKey());
+                                listener.onDeleteData(jurusanss.get(position), position);
+                                return true;
+
+                            default:
+                                return false;
+                        }
+                    }
+                });
+                //displaying the popup
+                popup.show();
+                return false;
+            }
+        });
+
+
         holder.no.setText(String.valueOf(position+1));
         holder.tvTitle.setText(name);
     }
@@ -88,5 +131,9 @@ public class JurusanAdapter extends RecyclerView.Adapter<JurusanAdapter.ViewHold
          * Mengembalikan jumlah item pada barang
          */
         return jurusanss.size();
+    }
+
+    public interface FirebaseDataListener{
+        void onDeleteData(Jurusan jurusan, int position);
     }
 }

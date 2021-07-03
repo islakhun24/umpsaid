@@ -19,14 +19,18 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import ump.ti.ump.DetailInfoAct;
+import ump.ti.ump.InformasiAct;
+import ump.ti.ump.MahasiswaAct;
 import ump.ti.ump.R;
 import ump.ti.ump.model.Informasi;
 import ump.ti.ump.model.Jurusan;
+import ump.ti.ump.model.Mahasiswa;
 
 public class InformasiAdapter extends RecyclerView.Adapter<InformasiAdapter.ViewHolder> {
 
     private ArrayList<Informasi> informasis;
     private Context context;
+    FirebaseDataListener listener;
 
     public InformasiAdapter(ArrayList<Informasi> informasi, Context ctx){
         /**
@@ -34,6 +38,7 @@ public class InformasiAdapter extends RecyclerView.Adapter<InformasiAdapter.View
          */
         informasis = informasi;
         context = ctx;
+        listener = (InformasiAct)ctx;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -108,6 +113,7 @@ public class InformasiAdapter extends RecyclerView.Adapter<InformasiAdapter.View
                                 return true;
                             case R.id.delete:
                                 //handle menu2 click
+                                listener.onDeleteData(informasi, position);
                                 return true;
 
                             default:
@@ -128,5 +134,9 @@ public class InformasiAdapter extends RecyclerView.Adapter<InformasiAdapter.View
          * Mengembalikan jumlah item pada barang
          */
         return informasis.size();
+    }
+
+    public interface FirebaseDataListener{
+        void onDeleteData(Informasi informasi, int position);
     }
 }

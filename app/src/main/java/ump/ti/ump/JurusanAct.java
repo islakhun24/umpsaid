@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -16,10 +19,12 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import ump.ti.ump.adapter.InformasiAdapter;
 import ump.ti.ump.adapter.JurusanAdapter;
 import ump.ti.ump.model.Jurusan;
+import ump.ti.ump.model.Mahasiswa;
 
-public class JurusanAct extends AppCompatActivity {
+public class JurusanAct extends AppCompatActivity implements JurusanAdapter.FirebaseDataListener{
     private DatabaseReference database;
     private RecyclerView rvView;
     private RecyclerView.Adapter adapter;
@@ -58,6 +63,7 @@ public class JurusanAct extends AppCompatActivity {
                      * untuk keperluan Edit dan Delete data
                      */
                     Jurusan jurusan = noteDataSnapshot.getValue(Jurusan.class);
+                    jurusan.setKey(noteDataSnapshot.getKey());
                     jurusan.setJurusan(dataSnapshot.child(noteDataSnapshot.getKey()).child("jurusan").getValue().toString());
 
                     /**
@@ -91,4 +97,17 @@ public class JurusanAct extends AppCompatActivity {
         return new Intent(activity, JurusanAct.class);
     }
 
+    @Override
+    public void onDeleteData(Jurusan jurusan, int position) {
+//        Log.d("ASW", "onDeleteData: "+jurusan.getKey());
+        if(database!=null){
+            database.child("jurusan").child(jurusan.getKey()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>(){
+
+                @Override
+                public void onSuccess(Void unused) {
+                    Toast.makeText(JurusanAct.this, "success delete", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+    }
 }

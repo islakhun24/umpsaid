@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,7 +23,7 @@ import ump.ti.ump.adapter.MahasiswaAdapter;
 import ump.ti.ump.model.Jurusan;
 import ump.ti.ump.model.Mahasiswa;
 
-public class MahasiswaAct extends AppCompatActivity {
+public class MahasiswaAct extends AppCompatActivity implements MahasiswaAdapter.FirebaseDataListener{
     private DatabaseReference database;
     private RecyclerView rvView;
     private RecyclerView.Adapter adapter;
@@ -96,4 +98,16 @@ public class MahasiswaAct extends AppCompatActivity {
         return new Intent(activity, MahasiswaAct.class);
     }
 
+    @Override
+    public void onDeleteData(Mahasiswa mahasiswa, int position) {
+        if(database!=null){
+            database.child("mahasiswa").child(mahasiswa.getKey()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>(){
+
+                @Override
+                public void onSuccess(Void unused) {
+                    Toast.makeText(MahasiswaAct.this, "success delete", Toast.LENGTH_LONG).show();
+                }
+            });
+        }
+    }
 }

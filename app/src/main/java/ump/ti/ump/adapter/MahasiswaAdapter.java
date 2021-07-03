@@ -6,10 +6,12 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,6 +20,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import ump.ti.ump.DetailMahasiswaAct;
+import ump.ti.ump.MahasiswaAct;
 import ump.ti.ump.R;
 import ump.ti.ump.model.Jurusan;
 import ump.ti.ump.model.Mahasiswa;
@@ -26,6 +29,7 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.View
 
     private ArrayList<Mahasiswa> mahasiswas;
     private Context context;
+    FirebaseDataListener listener;
 
     public MahasiswaAdapter(ArrayList<Mahasiswa> mahasiswaArrayList, Context ctx){
         /**
@@ -33,6 +37,7 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.View
          */
         mahasiswas = mahasiswaArrayList;
         context = ctx;
+        listener = (MahasiswaAct)ctx;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -100,7 +105,7 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.View
                 PopupMenu popup = new PopupMenu(context, holder.rl);
                 //inflating menu from xml resource
                 popup.inflate(R.menu.informasi_menu);
-                //adding click listener
+                        //adding click listener
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
@@ -110,6 +115,8 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.View
                                 return true;
                             case R.id.delete:
                                 //handle menu2 click
+//                                Toast.makeText(context,mahasiswa.getKey(),Toast.LENGTH_LONG).show();
+                                listener.onDeleteData(mahasiswas.get(position), position);
                                 return true;
 
                             default:
@@ -130,5 +137,9 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.View
          * Mengembalikan jumlah item pada barang
          */
         return mahasiswas.size();
+    }
+
+    public interface FirebaseDataListener{
+        void onDeleteData(Mahasiswa mahasiswa, int position);
     }
 }
