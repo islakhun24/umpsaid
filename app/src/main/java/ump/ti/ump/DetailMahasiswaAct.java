@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -22,8 +23,10 @@ import ump.ti.ump.model.Informasi;
 import ump.ti.ump.model.Mahasiswa;
 
 public class DetailMahasiswaAct extends AppCompatActivity {
-    EditText tvKeterangan,etJurusan,etAgama, tvNim,tvNama_mahasiswa,etTempat_lahir,etKewarganegaraan,etEmail, etTelepon, etAlamat, etNamaSekolah, etTahunLulus, etAlamatSekolah, etNamaOrangTua, etTeleponOrtu, etAlamatOrtu,etPassword, tvNoItas, tvNopaspor ;
+    EditText tvKeterangan,etJurusan,etAgama, tvNim,tvNama_mahasiswa,etTempat_lahir,etKewarganegaraan,etEmail, etTelepon, etAlamat, etNamaSekolah, etTahunLulus, etAlamatSekolah, etNamaOrangTua, etTeleponOrtu, etAlamatOrtu,etPassword, tvNoItas, tvNopaspor, etJenKel ;
     private String key;
+    private TextView tvMasaBerlaku;
+    TextView etTanggal_lahir;
     private ImageView imgView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +50,12 @@ public class DetailMahasiswaAct extends AppCompatActivity {
         etPassword = findViewById(R.id.etPassword);
         tvKeterangan = findViewById(R.id.tvKeterangan);
         tvNopaspor = findViewById(R.id.tvNopaspor);
+        tvMasaBerlaku = findViewById(R.id.tvMasaBerlaku);
+        etTanggal_lahir = findViewById(R.id.etTanggal_lahir);
         key = getIntent().getStringExtra("key");
         tvNoItas = findViewById(R.id.tvNoItas);
         etAgama = findViewById(R.id.etAgama);
+        etJenKel = findViewById(R.id.etJenkel);
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         DatabaseReference ref = database.child("mahasiswa").child(key);
         DatabaseReference refs = database.child("user").child(key);
@@ -70,8 +76,10 @@ public class DetailMahasiswaAct extends AppCompatActivity {
                             tvNama_mahasiswa.setText(mahasiswa.getNama_mahasiswa());
                             etTempat_lahir.setText(mahasiswa.getTempat_lahir());
                             etKewarganegaraan.setText(mahasiswa.getKewarganegaraan());
+                            tvMasaBerlaku.setText(mahasiswa.getMasa_berlaku());
 //                            etEmail.setText(mahasiswa.get);
                             etTelepon.setText(mahasiswa.getTelepon());
+                            etTanggal_lahir.setText(mahasiswa.getTanggal_lahir());
                             etAlamat.setText(mahasiswa.getAlamat());
                             etNamaSekolah.setText(mahasiswa.getNama_sekolah());
                             etTahunLulus.setText(mahasiswa.getTahun_lulus());
@@ -80,6 +88,7 @@ public class DetailMahasiswaAct extends AppCompatActivity {
                             etTeleponOrtu.setText(mahasiswa.getTelp_orang_tua());
                             etAlamatOrtu.setText(mahasiswa.getAlamat_orang_tua());
                             etJurusan.setText(mahasiswa.getJurusan());
+                            etJenKel.setText(mahasiswa.getJenis_kelamin());
 //                            imgView.setText(mahasiswa.);
 //                            etPassword.setText(mahasiswa.);
                             tvKeterangan.setText(mahasiswa.getKeterangan());

@@ -1,6 +1,7 @@
 package ump.ti.ump.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import ump.ti.ump.EditJurusanAct;
+import ump.ti.ump.EditMahasiswaEditAct;
 import ump.ti.ump.JurusanAct;
 import ump.ti.ump.MahasiswaAct;
 import ump.ti.ump.R;
@@ -101,6 +104,15 @@ public class JurusanAdapter extends RecyclerView.Adapter<JurusanAdapter.ViewHold
                         switch (item.getItemId()) {
                             case R.id.edit:
                                 //handle menu1 click
+                                Intent intent = new Intent(context, EditJurusanAct.class);
+                                intent.putExtra("key",jurusanss.get(position).getKey());
+//                                intent.putExtra("txtNama",mahasiswa.getKey());
+//                                intent.putExtra("jenkel",mahasiswa.getKey());
+//                                intent.putExtra("tvJurusan",mahasiswa.getKey());
+//                                intent.putExtra("tvKewarganegaraan",mahasiswa.getKey());
+//                                intent.putExtra("nim",mahasiswa.getKey());
+//                                intent.putExtra("nim",mahasiswa.getKey());
+                                context.startActivity(intent);
                                 return true;
                             case R.id.delete:
                                 //handle menu2 click

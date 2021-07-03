@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ump">
-        <activity android:name=".UbahPasswordAct"></activity>
+        <activity android:name=".EditInformasiAct"></activity>
+        <activity android:name=".EditJurusanAct" />
+        <activity android:name=".EditMahasiswaEditAct" />
+        <activity android:name=".UbahPasswordAct" />
         <activity android:name=".ProfilAct" />
         <activity android:name=".DetailMahasiswaAct" />
         <activity android:name=".DetailInfoAct" />

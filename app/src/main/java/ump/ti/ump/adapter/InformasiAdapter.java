@@ -19,6 +19,8 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import ump.ti.ump.DetailInfoAct;
+import ump.ti.ump.EditInformasiAct;
+import ump.ti.ump.EditJurusanAct;
 import ump.ti.ump.InformasiAct;
 import ump.ti.ump.MahasiswaAct;
 import ump.ti.ump.R;
@@ -110,6 +112,15 @@ public class InformasiAdapter extends RecyclerView.Adapter<InformasiAdapter.View
                         switch (item.getItemId()) {
                             case R.id.edit:
                                 //handle menu1 click
+                                Intent intent = new Intent(context, EditInformasiAct.class);
+                                intent.putExtra("key",informasi.getKey());
+//                                intent.putExtra("txtNama",mahasiswa.getKey());
+//                                intent.putExtra("jenkel",mahasiswa.getKey());
+//                                intent.putExtra("tvJurusan",mahasiswa.getKey());
+//                                intent.putExtra("tvKewarganegaraan",mahasiswa.getKey());
+//                                intent.putExtra("nim",mahasiswa.getKey());
+//                                intent.putExtra("nim",mahasiswa.getKey());
+                                context.startActivity(intent);
                                 return true;
                             case R.id.delete:
                                 //handle menu2 click

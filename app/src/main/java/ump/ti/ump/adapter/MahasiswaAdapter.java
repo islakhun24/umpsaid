@@ -20,6 +20,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import ump.ti.ump.DetailMahasiswaAct;
+import ump.ti.ump.EditMahasiswaEditAct;
 import ump.ti.ump.MahasiswaAct;
 import ump.ti.ump.R;
 import ump.ti.ump.model.Jurusan;
@@ -112,6 +113,15 @@ public class MahasiswaAdapter extends RecyclerView.Adapter<MahasiswaAdapter.View
                         switch (item.getItemId()) {
                             case R.id.edit:
                                 //handle menu1 click
+                                Intent intent = new Intent(context, EditMahasiswaEditAct.class);
+                                intent.putExtra("key",mahasiswa.getKey());
+//                                intent.putExtra("txtNama",mahasiswa.getKey());
+//                                intent.putExtra("jenkel",mahasiswa.getKey());
+//                                intent.putExtra("tvJurusan",mahasiswa.getKey());
+//                                intent.putExtra("tvKewarganegaraan",mahasiswa.getKey());
+//                                intent.putExtra("nim",mahasiswa.getKey());
+//                                intent.putExtra("nim",mahasiswa.getKey());
+                                context.startActivity(intent);
                                 return true;
                             case R.id.delete:
                                 //handle menu2 click
