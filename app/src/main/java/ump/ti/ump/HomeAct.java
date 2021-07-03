@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -82,8 +83,9 @@ public class HomeAct extends AppCompatActivity {
                     String masa_berlaku = mahasiswa.getMasa_berlaku();
                     DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
                     String date = df.format(new Date());
-                    if(Integer.parseInt(String.valueOf(getDaysBetweenDates(date,masa_berlaku)))>=3){
-                        pesan.setText("Masa Berlaku anda kurang dari "+getDaysBetweenDates(date,masa_berlaku)+" hari lagi. Silahkan perpanjang masa berlaku pasport anda");
+//                    Toast.makeText(getApplicationContext(),""+findDifference(date,masa_berlaku),Toast.LENGTH_LONG).show();
+                    if(Integer.parseInt(String.valueOf(findDifference(date,masa_berlaku)))<=365){
+                        pesan.setText("Masa Berlaku anda kurang dari "+findDifference(date,masa_berlaku)+" hari lagi. Silahkan perpanjang masa berlaku pasport anda");
                         notif.setVisibility(View.VISIBLE);
                     }
                     cvInput.setVisibility(View.GONE);
@@ -170,5 +172,41 @@ public class HomeAct extends AppCompatActivity {
     private static long getUnitBetweenDates(Date startDate, Date endDate, TimeUnit unit) {
         long timeDiff = endDate.getTime() - startDate.getTime();
         return unit.convert(timeDiff, TimeUnit.MILLISECONDS);
+    }
+
+    public static long findDifference(String start_date,
+                               String end_date)
+    {
+        // SimpleDateFormat converts the
+        // string format to date object
+        SimpleDateFormat sdf
+                = new SimpleDateFormat(
+                "dd-MM-yyyy");
+        long difference_In_Days = 0;
+
+        // Try Class
+        try {
+
+            // parse method is used to parse
+            // the text from a string to
+            // produce the date
+            Date d1 = sdf.parse(start_date);
+            Date d2 = sdf.parse(end_date);
+
+            // Calucalte time difference
+            // in milliseconds
+            long difference_In_Time
+                    = d2.getTime() - d1.getTime();
+
+            difference_In_Days
+                    = TimeUnit
+                    .MILLISECONDS
+                    .toDays(difference_In_Time)
+                    % 365;
+        }
+        catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return difference_In_Days;
     }
 }

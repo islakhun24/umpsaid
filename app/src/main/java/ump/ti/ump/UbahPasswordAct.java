@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -52,15 +53,16 @@ public class UbahPasswordAct extends AppCompatActivity {
 
     void ubahPassword(String pass1, String pass2){
         if (pass1.equals(pass2)) {
-            String currentEmail = firebaseUser.getEmail();
-            AuthCredential credential = EmailAuthProvider.getCredential(currentEmail, pass1);
-
-            firebaseUser.reauthenticate(credential)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
+//            String currentEmail = firebaseUser.getEmail();
+//            AuthCredential credential = EmailAuthProvider.getCredential(currentEmail, pass1);
+//            Log.e("TAG46", "onComplete: "+credential);
+//            firebaseUser.reauthenticate(credential)
+//                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+//
+//                        @Override
+//                        public void onComplete(@NonNull Task<Void> task) {
+//                            Log.d("TAG46", "onComplete: "+task);
+//                            if (task.isSuccessful()) {
                                 firebaseUser.updatePassword(pass1)
                                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
@@ -71,12 +73,12 @@ public class UbahPasswordAct extends AppCompatActivity {
                                                 finish();
                                             }
                                         });
-                            } else {
-                                Toast.makeText(UbahPasswordAct.this, "Authentication failed, wrong password?", Toast.LENGTH_LONG).show();
-//                                loadingDialog.dismiss();
-                            }
-                        }
-                    });
+//                            } else {
+//                                Toast.makeText(UbahPasswordAct.this, "Authentication failed, wrong password?", Toast.LENGTH_LONG).show();
+////                                loadingDialog.dismiss();
+//                            }
+//                        }
+//                    });
         } else {
             Toast.makeText(UbahPasswordAct.this, "Passwords tidak sama", Toast.LENGTH_LONG).show();
         }
