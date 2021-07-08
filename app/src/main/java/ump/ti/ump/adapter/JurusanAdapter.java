@@ -20,6 +20,7 @@ import ump.ti.ump.EditJurusanAct;
 import ump.ti.ump.EditMahasiswaEditAct;
 import ump.ti.ump.JurusanAct;
 import ump.ti.ump.MahasiswaAct;
+import ump.ti.ump.MahasiswaJurusanAct;
 import ump.ti.ump.R;
 import ump.ti.ump.model.Jurusan;
 import ump.ti.ump.model.Mahasiswa;
@@ -88,6 +89,14 @@ public class JurusanAdapter extends RecyclerView.Adapter<JurusanAdapter.ViewHold
                  *  Kodingan untuk tutorial Selanjutnya :p Delete dan update data
                  */
                 return true;
+            }
+        });
+        holder.rl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, MahasiswaJurusanAct.class);
+                intent.putExtra("title",name);
+                context.startActivity(intent);
             }
         });
 

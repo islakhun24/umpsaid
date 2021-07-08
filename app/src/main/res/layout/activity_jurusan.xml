@@ -4,7 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".JurusanAct">
+    <TextView
+        android:id="@+id/header"
+        android:gravity="center_vertical"
+        android:paddingLeft="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="56sp"
+        android:text="Jurusan"
+        android:layout_alignParentTop="true"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:background="@color/purple_700"
+        android:textColor="#fff"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"

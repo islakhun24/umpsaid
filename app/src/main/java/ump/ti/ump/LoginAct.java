@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,6 +33,7 @@ public class LoginAct extends AppCompatActivity implements View.OnClickListener 
     private EditText edtPass;
     private Button btnMasuk;
     private Button btnDaftar;
+    TextView btnForgot;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +46,7 @@ public class LoginAct extends AppCompatActivity implements View.OnClickListener 
         edtPass = (EditText)findViewById(R.id.tv_pass);
         btnMasuk = (Button) findViewById(R.id.btn_masuk);
         btnDaftar = (Button)findViewById(R.id.btn_daftar);
+        btnForgot = findViewById(R.id.forgotpassword);
 
         //nambahin method onClick, biar tombolnya bisa diklik
         btnMasuk.setOnClickListener(this);
@@ -57,6 +60,13 @@ public class LoginAct extends AppCompatActivity implements View.OnClickListener 
             Intent intent = new Intent(LoginAct.this, HomeAct.class);
             startActivity(intent);
         }
+
+        btnForgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginAct.this, ForgotPasswordAct.class));
+            }
+        });
 
     }
     private void signIn() {
